@@ -11,15 +11,18 @@ public class LangHandler implements LangHandlerInterface{
 
     private LangHandler(){
         try{
-            this.lc = new Locale("en", "");
-            this.rb = ResourceBundle.getBundle(FILE, this.lc);
+            System.out.println("Loading Language File.");
+            this.lc = new Locale("", "");
+            this.rb = ResourceBundle.getBundle("lang/lang", this.lc);
         }
-        catch(Exception e){}
+        catch(Exception e){
+            System.out.println("Failed loading Language File");
+        }
     }
     /**Factory method of LangHandler. Creates Singleton.
      * @return 0 if instance exists 1 otherwise.*/
     public static int init(){
-        if(LangHandler.lh != null){
+        if(LangHandler.lh == null){
         LangHandler.lh = new LangHandler();
         return 1;
         }

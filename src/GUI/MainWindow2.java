@@ -5,9 +5,10 @@
  */
 package GUI;
 
-import javax.swing.JFrame;
 import javax.swing.text.DefaultCaret;
+import logic.GlobalVariable;
 import logic.IniHandler;
+import logic.LangHandler;
 import logic.YdlBridge;
 
 /**
@@ -15,9 +16,8 @@ import logic.YdlBridge;
  * @author Ozymandias42
  */
 public class MainWindow2 extends javax.swing.JFrame {
-    
-    private JFrame window;
-    public MainWindowHandler mwh;
+    private MainWindow2 mw;
+    private final MainWindowHandler mwh;
     private YdlBridge ydlb;
 
     /**
@@ -26,9 +26,11 @@ public class MainWindow2 extends javax.swing.JFrame {
     public MainWindow2() {
         MainWindowHandler.init(this);
         this.mwh = MainWindowHandler.getMWI();
-        this.window = this;
-        initComponents();
+        GlobalVariable.init();
         IniHandler.getIni();
+        LangHandler.init();
+        initComponents();
+        //IniHandler.getIni();
     }
 
     /**

@@ -3,3 +3,4 @@ build/
 store/
 dist/
 nbproject/
+.idea/

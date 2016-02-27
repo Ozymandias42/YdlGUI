@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logic;
+
 
 import GUI.MainWindow2;
 import javax.swing.UIManager;
@@ -29,6 +29,7 @@ public class YouTubeDLGUI {
         java.awt.EventQueue.invokeLater(() -> {
             new MainWindow2().setVisible(true);
         });
+
                 
         
     }

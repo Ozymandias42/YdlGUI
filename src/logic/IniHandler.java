@@ -30,15 +30,19 @@ public class IniHandler {
     private IniHandler() {
         this.iniFile = new Properties();
 
+        /*
         System.out.println("System.getProperty(\"user.home\")+"
                 + "System.getProperty(\"file.separator\") = "
                 + System.getProperty("user.home")
                 + System.getProperty("file.separator"));
+        */
 
+        /*
         String home = System.getProperty("user.home");
         String separator = System.getProperty("file.separator");
+        */
 
-        file = new File(home + separator + "YDLGUI-settings.ini");
+        file = new File(GlobalVariable.userHome() + GlobalVariable.sep() + "YDLGUI-settings.ini");
         FileReader in;
         if (file.exists()) {
             try {
@@ -52,6 +56,7 @@ public class IniHandler {
         }
         else{
         try {
+            
             JOptionPane.showMessageDialog(MainWindowHandler.getMWI().getMainWindow(),
                     "This seems to be your first time running this App.\n"
                             + "To ensure a smooth experience we need you to "
@@ -61,7 +66,7 @@ public class IniHandler {
                             JOptionPane.INFORMATION_MESSAGE);
             
             System.out.println("Creating new Ini-File. in " + 
-                    home + separator + "YDLGUI-settings.ini");
+                    GlobalVariable.userHome() + GlobalVariable.sep() + "YDLGUI-settings.ini");
             file.createNewFile();
             iniFile = new StandardIniFile();
 
@@ -147,6 +152,8 @@ public class IniHandler {
 
             setProperty("youtube-dl.path.prefix", ydl);
             setProperty("ffmpeg.path.prefix", ffmpeg);
+            setProperty("customCountry", "");
+            setProperty("customLanguage","");
 
         }
 

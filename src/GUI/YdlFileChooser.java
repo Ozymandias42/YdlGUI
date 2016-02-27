@@ -7,6 +7,8 @@ package GUI;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import logic.GlobalVariable;
+import logic.LangHandler;
 
 /**
  *
@@ -16,7 +18,7 @@ public class YdlFileChooser extends JFileChooser {
     private JFrame parent;
     
     public YdlFileChooser(JFrame parent){
-        this(parent,"Choose target directory:");
+        this(parent,LangHandler.getValue("fchser.default-titel"));
     }
     
     public YdlFileChooser(JFrame parent, String title){
@@ -30,7 +32,7 @@ public class YdlFileChooser extends JFileChooser {
     
     public String getPath(){
         String path = this.getSelectedFile().getAbsolutePath();
-        if("/".equals(System.getProperty("file.separator"))){
+        if("/".equals(GlobalVariable.sep())){
             int newEnd = path.lastIndexOf("/");
             path = path.substring(0, newEnd);
         }
