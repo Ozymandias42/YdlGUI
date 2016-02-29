@@ -34,7 +34,7 @@ public class LangHandler implements LangHandlerInterface {
         }
 
         try {
-            this.rb = ResourceBundle.getBundle("lang" + GlobalVariable.sep() + "lang", this.lc);
+            this.rb = ResourceBundle.getBundle("lang/lang", this.lc);
         } catch (Exception e) {
             System.out.println("Failed loading Language File. "
                     + "\nGracefully shutting down."
