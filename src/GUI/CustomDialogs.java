@@ -42,16 +42,41 @@ public abstract class CustomDialogs {
         String text;
         if(GlobalVariable.isWin()){text = LangHandler.getValue("warning.ffmpeg-not-found.win");}
         else{text = LangHandler.getValue("warning.ffmpeg-not-found");}
-        JOptionPane.showMessageDialog(mwh.getMainWindow(), "Path to "
-                        + "ffmpeg should be set.\n"
-                        + "Otherwise files downloaded by the audio only option"
-                        + " might be unplayable by some players. \n"
-                        + "Setting path to ffmpeg to a default value.\n"
-                        + "Please change it "
-                        + "to the correct path later on. \n"
-                        + "File resides in: " + System.getProperty("user.home")
-                        + System.getProperty("file.separator")
-                        + "YDLGUI-settings.ini", LangHandler.getValue("warning.config.title"),
-                        JOptionPane.ERROR_MESSAGE);
+        
+        JOptionPane.showMessageDialog(mwh.getMainWindow(), text + System.getProperty("user.home")
+                + System.getProperty("file.separator")
+                + "YDLGUI-settings.ini", LangHandler.getValue("warning.config.title"),
+                JOptionPane.ERROR_MESSAGE);   
     }
+    public static int errorYdlNotSet(){
+        MainWindowHandler mwi = MainWindowHandler.getMWI();
+        String o1,o2,txt,ttl;
+        o1 = LangHandler.getValue("error.ydl-not-found-o1");
+        o2 = LangHandler.getValue("error.ydl-not-found-o2");
+        txt = LangHandler.getValue("error.ydl-not-found-txt");
+        ttl = LangHandler.getValue("error.ydl-not-found-ttl");
+        
+        String[] options = {o1, o2};
+        
+        return JOptionPane.showOptionDialog(
+                    mwi.getMainWindow(),
+                    txt, ttl,
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+    }
+    public static int errorFfmpegNotSet(){
+        MainWindowHandler mwi = MainWindowHandler.getMWI();
+        String o1,o2,txt,ttl;
+        o1 = LangHandler.getValue("error.ffmpeg-not-found-o1");
+        o2 = LangHandler.getValue("error.ffmpeg-not-found-o2");
+        txt = LangHandler.getValue("error.ffmpeg-not-found-txt");
+        ttl = LangHandler.getValue("error.ffmpeg-not-found-ttl");
+        String[] options = {o1, o2};
+        return JOptionPane.showOptionDialog(
+                    mwi.getMainWindow(),
+                    txt, ttl,
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+    }
+    
 }
