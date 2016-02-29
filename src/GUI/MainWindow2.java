@@ -27,6 +27,7 @@ public class MainWindow2 extends javax.swing.JFrame {
         MainWindowHandler.init(this);
         this.mwh = MainWindowHandler.getMWI();
         GlobalVariable.init();
+        IniHandler.init();
         IniHandler.getIni();
         LangHandler.init();
         initComponents();
@@ -54,23 +55,27 @@ public class MainWindow2 extends javax.swing.JFrame {
         pbarTxtLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("YouTube Downloader (powered by youtube-dl)");
+        setTitle(LangHandler.getValue("mw.title")
+        );
 
-        vidDownButton.setText("Download Video");
+        String vddwnbtn = LangHandler.getValue("mw.downvid-btn");
+        vidDownButton.setText(vddwnbtn);
         vidDownButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vidDownButtonActionPerformed(evt);
             }
         });
 
-        audDownButton.setText("Download Audio");
+        String auddwnbtn = LangHandler.getValue("mw.downaud-btn");
+        audDownButton.setText(auddwnbtn);
         audDownButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 audDownButtonActionPerformed(evt);
             }
         });
 
-        exitButton.setText("Exit");
+        String label = LangHandler.getValue("mw.exitbutton");
+        exitButton.setText(label);
         exitButton.setFocusCycleRoot(true);
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,9 +83,11 @@ public class MainWindow2 extends javax.swing.JFrame {
             }
         });
 
-        ydlOutputLabel.setText("youtube-dl Output:");
+        String ydloutlabel = LangHandler.getValue("mw.ydlout-label");
+        ydlOutputLabel.setText(ydloutlabel);
 
-        urlTextField.setText("youtube.com...");
+        String defText = LangHandler.getValue("mw.url-field");
+        urlTextField.setText(defText);
         urlTextField.setToolTipText("");
 
         urlFieldLabel.setText("URL:");
@@ -111,7 +118,7 @@ public class MainWindow2 extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
                                 .addComponent(vidDownButton, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                                 .addComponent(audDownButton))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(urlFieldLabel)
