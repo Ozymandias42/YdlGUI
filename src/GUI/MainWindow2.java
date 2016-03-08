@@ -53,6 +53,7 @@ public class MainWindow2 extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         ydlOutput = new javax.swing.JTextArea();
         pbarTxtLabel = new javax.swing.JLabel();
+        jMenuBar1 = (javax.swing.JMenuBar) new MenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(LangHandler.getValue("mw.title")
@@ -102,6 +103,7 @@ public class MainWindow2 extends javax.swing.JFrame {
 
         pbarTxtLabel.setText("-%");
         pbarTxtLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -218,6 +220,7 @@ public class MainWindow2 extends javax.swing.JFrame {
     private javax.swing.JButton audDownButton;
     private javax.swing.JProgressBar downloadProgressBar;
     private javax.swing.JButton exitButton;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel pbarTxtLabel;
     private javax.swing.JLabel urlFieldLabel;

@@ -19,11 +19,27 @@ public abstract class CustomDialogs {
                     text);
         return chooser;
     }
+    public static YdlFileChooser ydlLocation(JFrame parent){
+        String text;
+        if(GlobalVariable.isWin()){text = LangHandler.getValue("diag.chse.ydl.win");}
+        else{text = LangHandler.getValue("diag.chse.ydl");}
+        YdlFileChooser chooser = new YdlFileChooser(parent,
+                    text);
+        return chooser;
+    }
     public static YdlFileChooser ffmpegLocation(){
         String text;
         if(GlobalVariable.isWin()){text = LangHandler.getValue("diag.chse.ffmpeg.win");}
         else{text = LangHandler.getValue("diag.chse.ffmpeg");}
         YdlFileChooser chooser2 = new YdlFileChooser(MainWindowHandler.getMWI().getMainWindow(),
+                    text);
+        return chooser2;
+    }
+    public static YdlFileChooser ffmpegLocation(JFrame parent){
+        String text;
+        if(GlobalVariable.isWin()){text = LangHandler.getValue("diag.chse.ffmpeg.win");}
+        else{text = LangHandler.getValue("diag.chse.ffmpeg");}
+        YdlFileChooser chooser2 = new YdlFileChooser(parent,
                     text);
         return chooser2;
     }

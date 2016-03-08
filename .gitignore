@@ -4,3 +4,5 @@ store/
 dist/
 nbproject/
 .idea/
+build.xml
+manifest.mf

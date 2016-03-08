@@ -16,8 +16,10 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class YouTubeDLGUI {
 
     public static void main(String[] args) {
+
         try {
             // Set System L&F
+            System.setProperty("apple.laf.useScreenMenuBar", "true");
             UIManager.setLookAndFeel(
                     UIManager.getSystemLookAndFeelClassName());
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | 

@@ -39,15 +39,19 @@ public class YdlBridge extends Thread {
         this.dURL = dURL;
         this.mode = mode;
         setPrefixes();
-        YdlFileChooser chooser = new YdlFileChooser(mwi.getMainWindow());
         File currDir = new File(userHome + sep);
+        if(IniHandler.getIni().getProperty("default-download.path")== null){
+        YdlFileChooser chooser = new YdlFileChooser(mwi.getMainWindow());
+        
+        
         chooser.setCurrentDirectory(currDir);
         if (chooser.showDiag() == 1) {
             this.targetDir = chooser.getPath();
         } else {
             this.targetDir = userHome + sep + "Downloads";
         }
-
+        }
+        else{this.targetDir = userHome + sep + IniHandler.getIni().getProperty("default-download.path");}
         buildCommand();
 
     }

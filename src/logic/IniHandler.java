@@ -68,7 +68,10 @@ public class IniHandler {
             }
     }
     public String getProperty(String key) {
+        if(iniFile.getProperty(key)!=null){
         return iniFile.getProperty(key);
+        }
+        else{return "Not yet set.";}
     }
 
     public void setProperty(String key, String value) {
