@@ -55,6 +55,15 @@ public class YdlBridge extends Thread {
         buildCommand();
 
     }
+    public YdlBridge(int mode, String dURL, String dwnDst){
+        this.mwi = MainWindowHandler.getMWI();
+        this.dURL = dURL;
+        this.mode = mode;
+        setPrefixes();
+        File currDir = new File(userHome + sep);
+        this.targetDir = dwnDst;
+        buildCommand();
+    }
 
     private void buildCommand() {
 

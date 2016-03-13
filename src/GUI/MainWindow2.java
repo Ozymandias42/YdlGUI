@@ -53,6 +53,9 @@ public class MainWindow2 extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         ydlOutput = new javax.swing.JTextArea();
         pbarTxtLabel = new javax.swing.JLabel();
+        dwnDstLabel = new javax.swing.JLabel();
+        dwnDst = new javax.swing.JLabel();
+        changeDwnDstButton = new javax.swing.JButton();
         jMenuBar1 = (javax.swing.JMenuBar) new MenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -91,7 +94,7 @@ public class MainWindow2 extends javax.swing.JFrame {
         urlTextField.setText(defText);
         urlTextField.setToolTipText("");
 
-        urlFieldLabel.setText("URL:");
+        urlFieldLabel.setText(LangHandler.getValue("mw.url-field.label"));
 
         ydlOutput.setEditable(false);
         ydlOutput.setColumns(20);
@@ -103,6 +106,17 @@ public class MainWindow2 extends javax.swing.JFrame {
 
         pbarTxtLabel.setText("-%");
         pbarTxtLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+
+        dwnDstLabel.setText(LangHandler.getValue("mw.save-path.label"));
+
+        dwnDst.setText(IniHandler.getIni().getProperty("default-download.path"));
+
+        changeDwnDstButton.setText("...");
+        changeDwnDstButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeDwnDstButtonActionPerformed(evt);
+            }
+        });
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -118,14 +132,19 @@ public class MainWindow2 extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(vidDownButton, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
-                                .addComponent(audDownButton))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(urlFieldLabel)
+                                .addComponent(dwnDstLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(urlTextField))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(vidDownButton, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                                        .addComponent(audDownButton))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(dwnDst, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(changeDwnDstButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(4, 4, 4))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane2)
@@ -136,7 +155,11 @@ public class MainWindow2 extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(downloadProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pbarTxtLabel)))))
+                                .addComponent(pbarTxtLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(urlFieldLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(urlTextField)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -149,13 +172,18 @@ public class MainWindow2 extends javax.swing.JFrame {
                         .addComponent(urlFieldLabel))
                     .addComponent(urlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dwnDstLabel)
+                    .addComponent(dwnDst)
+                    .addComponent(changeDwnDstButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(audDownButton)
                     .addComponent(vidDownButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ydlOutputLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -180,7 +208,12 @@ public class MainWindow2 extends javax.swing.JFrame {
         // TODO add your handling code here:
         String dURL = urlTextField.getText();
         int mode = 0;
-        ydlb = new YdlBridge(mode, dURL);
+        if(dwnDst.getText() == null ? (IniHandler.getIni()).getProperty("default-download.path") == null : dwnDst.getText().equals((IniHandler.getIni()).getProperty("default-download.path"))){
+            ydlb = new YdlBridge(mode, dURL);
+        }
+        else{
+            ydlb = new YdlBridge(mode, dURL, dwnDst.getText());
+        }
         ydlb.start();
 
     }//GEN-LAST:event_vidDownButtonActionPerformed
@@ -190,9 +223,24 @@ public class MainWindow2 extends javax.swing.JFrame {
         
         String dURL = urlTextField.getText();
         int mode = 1;
-        ydlb = new YdlBridge(mode, dURL);
+        if(dwnDst.getText() == null ? (IniHandler.getIni()).getProperty("default-download.path") == null : dwnDst.getText().equals((IniHandler.getIni()).getProperty("default-download.path"))){
+            ydlb = new YdlBridge(mode, dURL);
+        }
+        else{
+            ydlb = new YdlBridge(mode, dURL, dwnDst.getText());
+        }
+        
         ydlb.start();
     }//GEN-LAST:event_audDownButtonActionPerformed
+
+    private void changeDwnDstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeDwnDstButtonActionPerformed
+        // TODO add your handling code here:
+        YdlFileChooser chooser = new YdlFileChooser(this);
+        if(chooser.showDiag()!=0){
+            String path = chooser.getPath();
+            dwnDst.setText(path);
+        }
+    }//GEN-LAST:event_changeDwnDstButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,7 +266,10 @@ public class MainWindow2 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton audDownButton;
+    private javax.swing.JButton changeDwnDstButton;
     private javax.swing.JProgressBar downloadProgressBar;
+    private javax.swing.JLabel dwnDst;
+    private javax.swing.JLabel dwnDstLabel;
     private javax.swing.JButton exitButton;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane2;
