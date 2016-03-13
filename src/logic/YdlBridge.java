@@ -51,7 +51,7 @@ public class YdlBridge extends Thread {
             this.targetDir = userHome + sep + "Downloads";
         }
         }
-        else{this.targetDir = userHome + sep + IniHandler.getIni().getProperty("default-download.path");}
+        else{this.targetDir = IniHandler.getIni().getProperty("default-download.path");}
         buildCommand();
 
     }
@@ -60,7 +60,6 @@ public class YdlBridge extends Thread {
         this.dURL = dURL;
         this.mode = mode;
         setPrefixes();
-        File currDir = new File(userHome + sep);
         this.targetDir = dwnDst;
         buildCommand();
     }
