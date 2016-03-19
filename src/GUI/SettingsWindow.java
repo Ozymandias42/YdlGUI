@@ -200,6 +200,7 @@ public class SettingsWindow extends javax.swing.JFrame {
         if(evt.getKeyCode() == VK_ENTER){
             ini.setProperty("default-download.path", defDwnTxtFld.getText());
             defDwnTxtFld.setText(ini.getProperty("default-download.path"));
+            MainWindowHandler.getMWI().updateDefDwnDst(ini.getProperty("default-download.path"));
         }
     }//GEN-LAST:event_defDwnTxtFldKeyPressed
 
@@ -228,8 +229,9 @@ public class SettingsWindow extends javax.swing.JFrame {
         YdlFileChooser chooser = new YdlFileChooser(this);
         if(chooser.showDiag()!=0){
             String path = chooser.getPath();
-            ffmpegPosTxtFld.setText(path);
+            defDwnTxtFld.setText(path);
             ini.setProperty("default-download.path", path);
+            MainWindowHandler.getMWI().updateDefDwnDst(ini.getProperty("default-download.path"));
         }
     }//GEN-LAST:event_defDwnChsrBtnActionPerformed
 
