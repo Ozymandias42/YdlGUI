@@ -33,7 +33,7 @@ public class IniHandler {
     }
 
     private void loadFile(){
-        file = new File(GlobalVariable.userHome() + GlobalVariable.sep() + "YDLGUI-settings.ini");
+        file = new File(GlobalParameters.userHome() + GlobalParameters.sep() + "YDLGUI-settings.ini");
         FileReader in;
         if (file.exists()) {
             try {
@@ -53,7 +53,7 @@ public class IniHandler {
                 CustomDialogs.firstTime();
 
                 System.out.println("Creating new Ini-File. in "
-                        + GlobalVariable.userHome() + GlobalVariable.sep() + "YDLGUI-settings.ini");
+                        + GlobalParameters.userHome() + GlobalParameters.sep() + "YDLGUI-settings.ini");
                 file.createNewFile();
                 iniFile = new StandardIniFile();
 

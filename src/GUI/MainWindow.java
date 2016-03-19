@@ -5,28 +5,34 @@
  */
 package GUI;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import logic.SessionParameters;
 import javax.swing.text.DefaultCaret;
-import logic.GlobalVariable;
+import logic.GlobalParameters;
 import logic.IniHandler;
 import logic.LangHandler;
 import logic.YdlBridge;
+import logic.YdlBridge_slimlined;
 
 /**
  *
  * @author Ozymandias42
  */
-public class MainWindow2 extends javax.swing.JFrame {
-    private MainWindow2 mw;
+public class MainWindow extends javax.swing.JFrame {
+    private MainWindow mw;
     private final MainWindowHandler mwh;
     private YdlBridge ydlb;
+    private SessionParameters dp;
 
     /**
      * Creates new form MainWindow2
      */
-    public MainWindow2() {
+    public MainWindow() {
         MainWindowHandler.init(this);
         this.mwh = MainWindowHandler.getMWI();
-        GlobalVariable.init();
+        GlobalParameters.init();
         IniHandler.init();
         IniHandler.getIni();
         LangHandler.init();
@@ -146,11 +152,7 @@ public class MainWindow2 extends javax.swing.JFrame {
                                         .addComponent(changeDwnDstButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(4, 4, 4))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane2)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(ydlOutputLabel)))
+                                .addComponent(jScrollPane2)
                                 .addGap(1, 1, 1))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(downloadProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -161,6 +163,10 @@ public class MainWindow2 extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(urlTextField)))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ydlOutputLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,31 +212,32 @@ public class MainWindow2 extends javax.swing.JFrame {
 
     private void vidDownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vidDownButtonActionPerformed
         // TODO add your handling code here:
-        String dURL = urlTextField.getText();
-        int mode = 0;
-        if(dwnDst.getText() == null ? (IniHandler.getIni()).getProperty("default-download.path") == null : dwnDst.getText().equals((IniHandler.getIni()).getProperty("default-download.path"))){
-            ydlb = new YdlBridge(mode, dURL);
+        this.dp = SessionParameters.getInstance();
+        dp.configParameters(urlTextField.getText(), 0, dwnDst.getText());
+        YdlBridge_slimlined ydlbs = null;
+        try {
+            ydlbs = new YdlBridge_slimlined();
+        } catch (IOException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-        else{
-            ydlb = new YdlBridge(mode, dURL, dwnDst.getText());
-        }
-        ydlb.start();
-
+        ydlbs.start();
+        
+        
+        
     }//GEN-LAST:event_vidDownButtonActionPerformed
 
     private void audDownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_audDownButtonActionPerformed
         // TODO add your handling code here:
-        
-        String dURL = urlTextField.getText();
-        int mode = 1;
-        if(dwnDst.getText() == null ? (IniHandler.getIni()).getProperty("default-download.path") == null : dwnDst.getText().equals((IniHandler.getIni()).getProperty("default-download.path"))){
-            ydlb = new YdlBridge(mode, dURL);
+        this.dp = SessionParameters.getInstance();
+        dp.configParameters(urlTextField.getText(), 1, dwnDst.getText());
+        YdlBridge_slimlined ydlbs = null;
+        try {
+            ydlbs = new YdlBridge_slimlined();
+        } catch (IOException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-        else{
-            ydlb = new YdlBridge(mode, dURL, dwnDst.getText());
-        }
+        ydlbs.start();
         
-        ydlb.start();
     }//GEN-LAST:event_audDownButtonActionPerformed
 
     private void changeDwnDstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeDwnDstButtonActionPerformed
@@ -259,7 +266,7 @@ public class MainWindow2 extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new MainWindow2().setVisible(true);
+            new MainWindow().setVisible(true);
         });
     }
 
@@ -290,4 +297,7 @@ public class MainWindow2 extends javax.swing.JFrame {
         pbarTxtLabel.setText(Integer.toString(i)+"%");
     }
     
+    public void updateDefDwnDst(String newPath){
+        this.dwnDst.setText(newPath);
+    }
 }

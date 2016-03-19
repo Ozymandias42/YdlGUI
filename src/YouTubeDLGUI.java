@@ -5,7 +5,7 @@
  */
 
 
-import GUI.MainWindow2;
+import GUI.MainWindow;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -29,7 +29,7 @@ public class YouTubeDLGUI {
 
         
         java.awt.EventQueue.invokeLater(() -> {
-            new MainWindow2().setVisible(true);
+            new MainWindow().setVisible(true);
         });
 
                 

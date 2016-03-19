@@ -16,4 +16,5 @@ public interface MainWindowHandlerInterface {
     public void addYdlOutLine(String s);
     public void updateProgressbar(int i);
     public void exitProgram();
+    public void updateDefDwnDst(String newPath);
 }

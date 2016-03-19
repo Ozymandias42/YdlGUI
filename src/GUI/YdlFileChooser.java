@@ -7,7 +7,7 @@ package GUI;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import logic.GlobalVariable;
+import logic.GlobalParameters;
 import logic.LangHandler;
 
 /**
@@ -32,7 +32,7 @@ public class YdlFileChooser extends JFileChooser {
     
     public String getPath(){
         String path = this.getSelectedFile().getAbsolutePath();
-        if("/".equals(GlobalVariable.sep())){
+        if("/".equals(GlobalParameters.sep())){
             int newEnd = path.lastIndexOf("/");
             path = path.substring(0, newEnd);
         }

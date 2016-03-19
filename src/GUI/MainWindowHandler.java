@@ -12,17 +12,17 @@ import javax.swing.JFrame;
  * @author Ozymandias42
  */
 public class MainWindowHandler implements MainWindowHandlerInterface{
-        private final MainWindow2 window;
+        private final MainWindow window;
         private static MainWindowHandler mwi;
         
-        private MainWindowHandler(MainWindow2 window){
+        private MainWindowHandler(MainWindow window){
             this.window = window;
         }
         
         public static MainWindowHandler getMWI(){
                 return mwi;
             }
-        public static void init(MainWindow2 window){
+        public static void init(MainWindow window){
             mwi = new MainWindowHandler(window);
         }
             
@@ -38,7 +38,7 @@ public class MainWindowHandler implements MainWindowHandlerInterface{
         }
         @Override
         public void exitProgram(){
-            MainWindow2 mw = (MainWindow2) this.getMainWindow();
+            MainWindow mw = (MainWindow) this.getMainWindow();
             mw.setVisible(false);
             mw.dispose();
             System.exit(0);
@@ -47,5 +47,10 @@ public class MainWindowHandler implements MainWindowHandlerInterface{
     @Override
     public void updateProgressbar(int i) {
         this.window.downloadProgessbarUpdate(i);
+    }
+
+    @Override
+    public void updateDefDwnDst(String newPath) {
+        this.window.updateDefDwnDst(newPath);
     }
 }

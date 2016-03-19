@@ -1,28 +1,29 @@
 package logic;
 
-public class GlobalVariable{
+public class GlobalParameters{
         String sep, userHome;
         Boolean win;
-        static GlobalVariable gb;
+        static GlobalParameters gb;
 
-        private GlobalVariable(){
+        private GlobalParameters(){
             this.userHome = System.getProperty("user.home");
             this.sep      = System.getProperty("file.separator");
             this.win      = "\\".equals(this.sep);
         }
 
         public static void init(){
-            if(GlobalVariable.gb == null){
-                GlobalVariable.gb = new GlobalVariable();
+            if(GlobalParameters.gb == null){
+                GlobalParameters.gb = new GlobalParameters();
             }
         }
+        public static GlobalParameters getInstance(){return gb;}
         public static Boolean isWin(){
-            return GlobalVariable.gb.win;
+            return GlobalParameters.gb.win;
         }
         public static String userHome(){
-            return GlobalVariable.gb.userHome;
+            return GlobalParameters.gb.userHome;
         }
         public static String sep(){
-            return GlobalVariable.gb.sep;
+            return GlobalParameters.gb.sep;
         }
         }

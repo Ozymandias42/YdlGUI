@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author Ozymandias42
+ * @deprecated
  */
 import GUI.*;
 import java.io.File;
@@ -32,7 +33,7 @@ public class YdlBridge extends Thread {
     private final MainWindowHandlerInterface mwi;
     private BufferedReader stdInput;
     private BufferedReader stdError;
-    private String sep,userHome;
+    private String sep, userHome;
 
     public YdlBridge(int mode, String dURL) {
         this.mwi = MainWindowHandler.getMWI();
@@ -40,22 +41,23 @@ public class YdlBridge extends Thread {
         this.mode = mode;
         setPrefixes();
         File currDir = new File(userHome + sep);
-        if(IniHandler.getIni().getProperty("default-download.path")== null){
-        YdlFileChooser chooser = new YdlFileChooser(mwi.getMainWindow());
-        
-        
-        chooser.setCurrentDirectory(currDir);
-        if (chooser.showDiag() == 1) {
-            this.targetDir = chooser.getPath();
+        if (IniHandler.getIni().getProperty("default-download.path") == null) {
+            YdlFileChooser chooser = new YdlFileChooser(mwi.getMainWindow());
+
+            chooser.setCurrentDirectory(currDir);
+            if (chooser.showDiag() == 1) {
+                this.targetDir = chooser.getPath();
+            } else {
+                this.targetDir = userHome + sep + "Downloads";
+            }
         } else {
-            this.targetDir = userHome + sep + "Downloads";
+            this.targetDir = IniHandler.getIni().getProperty("default-download.path");
         }
-        }
-        else{this.targetDir = IniHandler.getIni().getProperty("default-download.path");}
         buildCommand();
 
     }
-    public YdlBridge(int mode, String dURL, String dwnDst){
+
+    public YdlBridge(int mode, String dURL, String dwnDst) {
         this.mwi = MainWindowHandler.getMWI();
         this.dURL = dURL;
         this.mode = mode;
@@ -84,8 +86,8 @@ public class YdlBridge extends Thread {
     }
 
     private void setPrefixes() {
-        this.sep = GlobalVariable.sep();
-        this.userHome = GlobalVariable.userHome();
+        this.sep = GlobalParameters.sep();
+        this.userHome = GlobalParameters.userHome();
         IniHandler iniProps = IniHandler.getIni();
         this.prefix = iniProps.getProperty("youtube-dl.path.prefix");
         this.ffmpegPrefix = iniProps.getProperty("ffmpeg.path.prefix");
@@ -107,7 +109,7 @@ public class YdlBridge extends Thread {
         }
 
         if (ffmpegPrefix.equals("NOT SET") && this.mode == 1) {
-            
+
             if (CustomDialogs.errorFfmpegNotSet() == 0) {
 
                 YdlFileChooser chooser2 = CustomDialogs.ffmpegLocation();
@@ -141,7 +143,7 @@ public class YdlBridge extends Thread {
 
                 String[] prog = s.split(" ");
                 for (String i : prog) {
-                    
+
                     if (i.matches("\\d{1,3}%") || i.matches("\\d{1,3}\\.\\d{1,2}%")) {
                         String tmp = i.substring(0, i.length() - 1);
                         float f = Float.parseFloat(tmp);
