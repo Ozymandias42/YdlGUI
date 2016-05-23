@@ -31,8 +31,9 @@ public abstract class CustomDialogs {
         String text;
         if(GlobalParameters.isWin()){text = LangHandler.getValue("diag.chse.ffmpeg.win");}
         else{text = LangHandler.getValue("diag.chse.ffmpeg");}
-        YdlFileChooser chooser2 = new YdlFileChooser(MainWindowHandler.getMWI().getMainWindow(),
-                    text);
+        //YdlFileChooser chooser2 = new YdlFileChooser(MainWindowHandler.getMWI().getMainWindow(),text);
+        YdlFileChooser chooser2 = new YdlFileChooser(null,
+                text);
         return chooser2;
     }
     public static YdlFileChooser ffmpegLocation(JFrame parent){

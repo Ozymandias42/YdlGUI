@@ -13,7 +13,6 @@ import javax.swing.text.DefaultCaret;
 import logic.GlobalParameters;
 import logic.IniHandler;
 import logic.LangHandler;
-import logic.YdlBridge;
 import logic.YdlBridge_slimlined;
 
 /**
@@ -23,7 +22,6 @@ import logic.YdlBridge_slimlined;
 public class MainWindow extends javax.swing.JFrame {
     private MainWindow mw;
     private final MainWindowHandler mwh;
-    private YdlBridge ydlb;
     private SessionParameters dp;
 
     /**
@@ -215,11 +213,13 @@ public class MainWindow extends javax.swing.JFrame {
         this.dp = SessionParameters.getInstance();
         dp.configParameters(urlTextField.getText(), 0, dwnDst.getText());
         YdlBridge_slimlined ydlbs = null;
+
         try {
             ydlbs = new YdlBridge_slimlined();
         } catch (IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         ydlbs.start();
         
         
@@ -231,11 +231,13 @@ public class MainWindow extends javax.swing.JFrame {
         this.dp = SessionParameters.getInstance();
         dp.configParameters(urlTextField.getText(), 1, dwnDst.getText());
         YdlBridge_slimlined ydlbs = null;
+        
         try {
             ydlbs = new YdlBridge_slimlined();
         } catch (IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         ydlbs.start();
         
     }//GEN-LAST:event_audDownButtonActionPerformed

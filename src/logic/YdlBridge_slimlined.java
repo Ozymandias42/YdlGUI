@@ -39,6 +39,7 @@ public class YdlBridge_slimlined extends Thread{
     
     private void feedback2MainWindow() throws IOException{
         String s;
+        this.mwi.updateProgressbar(0);
             while ((s = stdInput.readLine()) != null || (s = stdError.readLine()) != null) {
                 String[] prog = s.split(" ");
                 for (String i : prog) {
@@ -50,11 +51,12 @@ public class YdlBridge_slimlined extends Thread{
                     }
                 }
                 mwi.addYdlOutLine(s + "\n");
+                //NotificationHandler.getInstance().fireDownloadFinishedNotification();
             }
     }
     private void exec() throws IOException{
             this.p = CustomProcessBuilder.getInstance().build().start();
-            this.mwi.updateProgressbar(0);
+
 
          this.stdInput = new BufferedReader(new InputStreamReader(this.p.getInputStream()));
          this.stdError = new BufferedReader(new InputStreamReader(this.p.getErrorStream()));

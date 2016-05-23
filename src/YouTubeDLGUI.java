@@ -19,7 +19,9 @@ public class YouTubeDLGUI {
 
         try {
             // Set System L&F
-            System.setProperty("apple.laf.useScreenMenuBar", "true");
+            if(System.getProperty("os.name").contains("Mac")) {
+                System.setProperty("apple.laf.useScreenMenuBar", "true");
+            }
             UIManager.setLookAndFeel(
                     UIManager.getSystemLookAndFeelClassName());
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | 

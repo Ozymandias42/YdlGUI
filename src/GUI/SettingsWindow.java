@@ -238,16 +238,16 @@ public class SettingsWindow extends javax.swing.JFrame {
     private void ydlPosTxtFldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ydlPosTxtFldKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == VK_ENTER){
-            ini.setProperty("youtube-dl.path.prefix", defDwnTxtFld.getText());
-            defDwnTxtFld.setText(ini.getProperty("youtube-dl.path.prefix"));
+            ini.setProperty("youtube-dl.path.prefix", ydlPosTxtFld.getText());
+            ydlPosTxtFld.setText(ini.getProperty("youtube-dl.path.prefix"));
         }
     }//GEN-LAST:event_ydlPosTxtFldKeyPressed
 
     private void ffmpegPosTxtFldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ffmpegPosTxtFldKeyPressed
         // TODO add your handling code here:
          if(evt.getKeyCode() == VK_ENTER){
-            ini.setProperty("ffmpeg.path.prefix", defDwnTxtFld.getText());
-            defDwnTxtFld.setText(ini.getProperty("ffmpeg.path.prefix"));
+            ini.setProperty("ffmpeg.path.prefix", ffmpegPosTxtFld.getText());
+            ffmpegPosTxtFld.setText(ini.getProperty("ffmpeg.path.prefix"));
         }
     }//GEN-LAST:event_ffmpegPosTxtFldKeyPressed
 

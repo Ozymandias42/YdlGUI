@@ -1,0 +1,11 @@
+#!/usr/bin/env osascript -l JavaScript
+
+var app = Application.currentApplication();
+app.includeStandardAdditions = true;
+
+function run(argv) {
+	var title = argv[0];
+	var message = argv[1];
+	var sub = argv[2];
+	app.displayNotification(message, {withTitle: title, subtitle: sub, soundName : "default"});
+}

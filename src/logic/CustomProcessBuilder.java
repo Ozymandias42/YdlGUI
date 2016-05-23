@@ -16,6 +16,7 @@
  */
 package logic;
 
+import GUI.MainWindowHandler;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -27,7 +28,7 @@ import java.util.ArrayList;
  * choosen destination folder or additional parameters.
  * @author fabian
  */
-public class CustomProcessBuilder extends Thread{
+public class CustomProcessBuilder {
     private final SessionParameters sp;
     private final IniHandler ini;
     private final GlobalParameters gp;
@@ -80,10 +81,13 @@ public class CustomProcessBuilder extends Thread{
 }
     private void buildAudioDownload(){
         //IF path to ffmpeg IS set do stuff.
-        if(!"NOT SET".equals(this.ini.getProperty("ffmpeg.path.prefix"))){
-        this.cmdString.add("--ffmpeg-location");
-        this.cmdString.add(this.ini.getProperty("ffmpeg.path.prefix"));
+        if(!"NOT SET".equals(this.ini.getProperty("ffmpeg.path.prefix"))) {
+            this.cmdString.add("--ffmpeg-location");
+            this.cmdString.add(this.ini.getProperty("ffmpeg.path.prefix"));
         }
-        buildVideoDownload();
+        else{
+            MainWindowHandler.getMWI().addYdlOutLine("FFMPEG NOT SET. SHOULD BE SET\n\n");
+        }
+            buildVideoDownload();
     }
 }
